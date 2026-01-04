@@ -1,0 +1,221 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: var(--color-primary);
+}
+
+.header-contenu {
+  justify-content: space-between; /* !mettre de l'espace entre les elements */
+  align-items: center;
+}
+
+.header-contenu h1 {
+  text-align: center;
+}
+
+.menu-principal {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  list-style: none; /* !enlever les points dans les liste */
+}
+
+.menu-principal li a {
+  text-decoration: none;
+  color: var(--color-text);
+  padding: 5px 10px;
+  border-radius: 35px;
+  transition: 0.3s ease;
+}
+
+.menu-principal li a:hover {
+  background-color: var(--color-secondary);
+}
+
+.nav-link {
+  background-color: var(--color-secondary);
+}
+
+/* message */
+.message-success {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  border: 1px solid var(--color-primary-light);
+  font-weight: 500;
+}
+
+.message-error {
+  background-color: var(--color-rouge-light);
+  color: var(--color-rouge);
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  border: 1px solid var(--color-rouge);
+  font-weight: 500;
+}
+
+/* CONTENEUR PRINCIPAL */
+main {
+  padding: 40px 0;
+  background-color: var(--color-bg);
+  min-height: 100vh;
+}
+
+/* SECTION */
+.listesProduits {
+  padding: 30px;
+  border-radius: 10px;
+}
+
+/* TITRE */
+.tablauProduits h2,
+.form-produit h2 {
+  margin-top: 100px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--color-secondary-light); /* bordure extérieure */
+}
+
+/* EN-TÊTES */
+thead th {
+  background-color: var(--color-secondary);
+  padding: 12px;
+  text-transform: uppercase;
+  font-size: 15px;
+  border-right: 1px solid rgba(255, 255, 255, 0.4); /* séparation colonnes */
+}
+
+/* Largeur des colonnes */
+.col-id {
+  width: 8px;
+}
+
+.col-nom {
+  width: 130px;
+}
+
+.col-prix {
+  width: 100px;
+}
+
+.col-quantite {
+  width: 70px;
+}
+
+.col-categorie {
+  width: 90px;
+}
+
+.col-actions {
+  width: 180px;
+}
+
+/* CELLULES */
+tbody td {
+  padding: 12px;
+  text-align: center;
+  font-size: 15px;
+  border-right: 1px solid var(--color-secondary-light); /* séparation colonnes */
+  border-bottom: 1px solid var(--color-secondary-light);
+}
+
+/* SUPPRIMER LE TRAIT DE LA DERNIÈRE COLONNE */
+thead th:last-child,
+tbody td:last-child {
+  border-right: none;
+}
+
+/* RUPTURE DE STOCK */
+.rupture {
+  background-color: var(--color-rouge-light) !important;
+  color: var(--color-rouge);
+}
+
+/* LIENS ACTIONS */
+td a {
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  margin: 0 3px;
+  margin-bottom: 120px;
+  transition: 0.3s;
+}
+
+/* BOUTON MODIFIER */
+td a[href*="modifier"],
+.form-produit button {
+  background-color: var(--color-primary);
+  color: var(--color-text);
+}
+
+td a[href*="modifier"]:hover,
+.form-produit button:hover {
+  background-color: var(--color-primary-light);
+}
+
+/* BOUTON SUPPRIMER */
+td a[href*="supprimer"] {
+  background-color: var(--color-secondary-light);
+  color: var(--color-text);
+}
+
+td a[href*="supprimer"]:hover {
+  background-color: var(--color-secondary);
+}
+
+.header h1 {
+    text-align: center;
+}
+
+.form-produit {
+  max-width: 400px;
+  margin: auto;
+  margin-top: 130px;
+}
+
+.form-produit h2 {
+    text-align: center;
+}
+
+.form-produit label {
+  display: block;
+  margin-top: 15px;
+  font-size: 16px;
+  color: var(--color-text);
+  padding: 4px;
+}
+
+.form-produit input {
+  width: calc(100% - 8px);
+  padding: 5px;
+  margin-top: 5px;
+  border: 1px solid var(--color-primary-light);
+}
+
+.form-produit select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid var(--color-primary-light);
+  background-color: var(--color-blanc);
+}
+
+.form-produit button {
+  margin-top: 30px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+}

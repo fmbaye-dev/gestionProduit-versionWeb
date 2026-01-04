@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestion Produit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900
+	&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;
+	1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/base.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="header-contenu">
+          <h1>Gestion Produit</h1>
+          <ul class="menu-principal">
+            <li><a href="/" class="nav-link">Accueil</a></li>
+            <li>
+              <a href="/ajouter">Ajouter Produit</a>
+            </li>
+            <li><a href="rechercher">Rechercher</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="listesProduits">
+        <div class="container">
+          <div class="tablauProduits">
+            <h2>Liste des produits</h2>
+
+            <% if (success) { %>
+            <div class="message-success"><%= success %></div>
+            <% } %> <% if (error) { %>
+            <div class="message-error"><%= error %></div>
+            <% } %>
+
+            <table>
+              <thead>
+                <tr>
+                  <th class="col-id">ID</th>
+                  <th class="col-nom">Nom</th>
+                  <th class="col-prix">Prix</th>
+                  <th class="col-quantite">Quantité</th>
+                  <th class="col-categorie">Catégorie</th>
+                  <th class="col-actions">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% produits.forEach(produit => { %>
+                <tr class="<%= produit.quantite === 0 ? 'rupture' : '' %>">
+                  <td><%= produit.id %></td>
+                  <td><%= produit.nom %></td>
+                  <td><%= produit.prix %> FCFA</td>
+                  <td><%= produit.quantite %></td>
+                  <td><%= produit.categorie %></td>
+                  <td class="action">
+                    <a href="/modifier/<%= produit.id %>">Modifier</a>|
+                    <a href="/produits/<%= produit.id %>/supprimer">
+                      Supprimer
+                    </a>
+                  </td>
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+    <title>Gestion Produit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900
+	&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;
+	1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/base.css" />
+</head>
+<body>
+
+<header class="header">
+  <h1>Modifier un produit</h1>
+</header>
+
+<main>
+    <section class="ajoutProduits">
+        <div class="container">
+          <div class="form-produit">
+            <h2>Produit n° <%= produit.id %></h2>
+
+            <% if (error) { %>
+                <div class="message-error"><%= error %></div>
+            <% } %>
+
+            <form action="/produits/<%= produit.id %>/modifier" method="POST">
+
+                <label>Nom</label>
+                <input type="text" name="nom" value="<%= produit.nom %>" required>
+
+                <label>Prix (FCFA)</label>
+                <input type="number" name="prix" value="<%= produit.prix %>" required>
+
+                <label>Quantité</label>
+                <input type="number" name="quantite" value="<%= produit.quantite %>" required>
+
+                <label>Catégorie</label>
+                <select name="categorie" required>
+                <option value="Fourniture" <%= produit.categorie === 'Fourniture' ? 'selected' : '' %>>Fourniture</option>
+                <option value="Accessoire" <%= produit.categorie === 'Accessoire' ? 'selected' : '' %>>Accessoire</option>
+                <option value="Électronique" <%= produit.categorie === 'Électronique' ? 'selected' : '' %>>Électronique</option>
+                <option value="Autre" <%= produit.categorie === 'Autre' ? 'selected' : '' %>>Autre</option>
+                </select>
+
+                <button type="submit">Enregistrer les modifications</button>
+            </form>
+            </main>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

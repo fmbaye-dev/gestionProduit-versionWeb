@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestion Produit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900
+	&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;
+	1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/base.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="header-contenu">
+          <h1>Gestion Produit</h1>
+          <ul class="menu-principal">
+            <li><a href="/">Accueil</a></li>
+            <li>
+              <a href="/ajouter" class="nav-link">Ajouter Produit</a>
+            </li>
+            <li><a href="rechercher">Rechercher</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="ajoutProduits">
+        <div class="container">
+          <div class="form-produit">
+             <h2>Ajouter un produit</h2>
+
+            <% if (error) { %>
+                <div class="message-error"><%= error %></div>
+            <% } %>
+
+            <% if (success) { %>
+                <div class="message-success"><%= success %></div>
+            <% } %>
+
+            <form action="/produits" method="POST">
+
+                <label>Nom du produit</label>
+                <input type="text" name="nom" value="<%= values.nom || '' %>">
+
+                <label>Prix (FCFA)</label>
+                <input type="number" name="prix" value="<%= values.prix || '' %>">
+
+                <label>Quantité</label>
+                <input type="number" name="quantite" value="<%= values.quantite || '' %>">
+
+                <label>Catégorie</label>
+                <select name="categorie">
+                <option value="">-- Choisir une catégorie --</option>
+                <option value="Fourniture" <%= values.categorie === 'Fourniture' ? 'selected' : '' %>>Fourniture</option>
+                <option value="Accessoire" <%= values.categorie === 'Accessoire' ? 'selected' : '' %>>Accessoire</option>
+                <option value="Électronique" <%= values.categorie === 'Électronique' ? 'selected' : '' %>>Électronique</option>
+                </select>
+
+                <button type="submit">Ajouter</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

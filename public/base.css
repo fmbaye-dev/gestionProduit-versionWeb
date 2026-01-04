@@ -1,0 +1,44 @@
+:root {
+  /* Colors */
+  --color-primary: #8f9a5a; /* Green Olive */
+  --color-primary-light: #aeb77a;
+  --color-secondary: #9aaec6; /* Endless Sky */
+  --color-secondary-light: #c9d4e1;
+
+  --color-rouge: #721c24;
+  --color-rouge-light: #f5c6cb;
+
+  --color-bg: #f7f7f5;
+  --color-blanc: #ffff;
+  --color-text: #2e2e2e;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h2,
+h3 {
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+  color: var(--color-text);
+}
+
+h1 {
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  color: var(--color-text);
+}
+
+.container {
+  max-width: 1250px;
+  margin: auto; /* !pour fixer le contenu au mileu*/
+  padding: 0 20px;
+}
