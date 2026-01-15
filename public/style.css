@@ -76,7 +76,8 @@ main {
 
 /* TITRE */
 .tablauProduits h2,
-.form-produit h2 {
+.form-produit h2,
+.resultat h2 {
   margin-top: 100px;
   margin-bottom: 20px;
   text-align: center;
@@ -157,13 +158,17 @@ td a {
 
 /* BOUTON MODIFIER */
 td a[href*="modifier"],
-.form-produit button {
+.form-produit button,
+.formulaire button,
+.formulaire a {
   background-color: var(--color-primary);
   color: var(--color-text);
 }
 
 td a[href*="modifier"]:hover,
-.form-produit button:hover {
+.form-produit button:hover,
+.formulaire button:hover,
+.formulaire a:hover {
   background-color: var(--color-primary-light);
 }
 
@@ -181,17 +186,20 @@ td a[href*="supprimer"]:hover {
     text-align: center;
 }
 
-.form-produit {
+.form-produit,
+.formulaire {
   max-width: 400px;
   margin: auto;
   margin-top: 130px;
 }
 
-.form-produit h2 {
+.form-produit h2,
+.formulaire h2 {
     text-align: center;
 }
 
-.form-produit label {
+.form-produit label,
+.formulaire label {
   display: block;
   margin-top: 15px;
   font-size: 16px;
@@ -199,23 +207,44 @@ td a[href*="supprimer"]:hover {
   padding: 4px;
 }
 
-.form-produit input {
+.form-produit input,
+.formulaire input {
   width: calc(100% - 8px);
   padding: 5px;
   margin-top: 5px;
   border: 1px solid var(--color-primary-light);
 }
 
-.form-produit select {
+#checkbox {
+  width: 4%;
+}
+
+.form-produit select,
+.formulaire select {
   width: 100%;
   padding: 5px;
   border: 1px solid var(--color-primary-light);
   background-color: var(--color-blanc);
 }
 
-.form-produit button {
+.form-produit button,
+.formulaire button {
+  cursor: pointer;
   margin-top: 30px;
   padding: 10px;
   width: 100%;
   border: none;
+}
+
+.formulaire button {
+  margin-bottom: 25px;
+}
+
+.formulaire a {
+  padding: 10px;
+  padding-left: 165px;
+  padding-right: 158px;
+  text-decoration: none;
+  font-size: 14px;
+  width: 100%;
 }

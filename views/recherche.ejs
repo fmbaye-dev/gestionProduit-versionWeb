@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestion Produit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900
+	&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;
+	1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/base.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="header-contenu">
+          <h1>Gestion Produit</h1>
+          <ul class="menu-principal">
+            <li><a href="/">Accueil</a></li>
+            <li>
+              <a href="/ajouter">Ajouter Produit</a>
+            </li>
+            <li><a href="/recherche" class="nav-link">Rechercher</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="recherche">
+        <div class="container">
+            <div class="formulaire">
+                <form method="GET" action="/recherche">
+
+                    <label>Catégorie</label>
+                    <select name="categorie">
+                    <option value="">Toutes</option>
+                    <option value="Fourniture" <%= filtres.categorie === 'Fourniture' ? 'selected' : '' %>>Fourniture</option>
+                    <option value="Accessoire" <%= filtres.categorie === 'Accessoire' ? 'selected' : '' %>>Accessoire</option>
+                    <option value="Électronique" <%= filtres.categorie === 'Électronique' ? 'selected' : '' %>>Électronique</option>
+                    </select>
+
+                    <label>Prix minimum</label>
+                    <input type="number" name="prixMin" value="<%= filtres.prixMin || '' %>">
+
+                    <label>Prix maximum</label>
+                    <input type="number" name="prixMax" value="<%= filtres.prixMax || '' %>">
+
+                    <label>En stock uniquement</label>
+                    <input id="checkbox" type="checkbox" name="stock" <%= filtres.stock === 'on' ? 'checked' : '' %>>
+
+                    <button type="submit">Rechercher</button>
+                    <a href="/recherche" class="btn-reset">Réinitialiser</a>
+
+                </form>
+            </div>
+
+            <div class="resultat">
+                <h3><%= total %> résultat(s) trouvé(s)</h3>
+
+                <% if (produits.length === 0) { %>
+                    <p>Aucun produit trouvé.</p>
+                <% } else { %>
+
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="col-id">ID</th>
+                        <th class="col-nom">Nom</th>
+                        <th class="col-prix">Prix</th>
+                        <th class="col-quantite">Quantité</th>
+                        <th class="col-categorie">Catégorie</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% produits.forEach(p => { %>
+                        <tr>
+                        <td><%= p.id %></td>
+                        <td><%= p.nom %></td>
+                        <td><%= p.prix %> FCFA</td>
+                        <td><%= p.quantite %></td>
+                        <td><%= p.categorie %></td>
+                        </tr>
+                    <% }) %>
+                    </tbody>
+                </table>
+
+                <% } %>
+            </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

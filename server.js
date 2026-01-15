@@ -190,6 +190,47 @@ app.post("/produits", (req, res) => {
   );
 });
 
+app.get("/recherche", (req, res) => {
+  const { categorie, prixMin, prixMax, stock } = req.query;
+
+  let sql = "select * from produits where 1=1";
+  let params = [];
+
+  // Filtre catégorie
+  if (categorie) {
+    sql += " and categorie = ?";
+    params.push(categorie);
+  }
+
+  // Prix minimum
+  if (prixMin) {
+    sql += " and prix >= ?";
+    params.push(prixMin);
+  }
+
+  // Prix maximum
+  if (prixMax) {
+    sql += " and prix <= ?";
+    params.push(prixMax);
+  }
+
+  // En stock uniquement
+  if (stock === "on") {
+    sql += " and quantite > 0";
+  }
+
+  connection.query(sql, params, (err, result) => {
+    if (err) throw err;
+
+    res.render("recherche.ejs", {
+      produits: result,
+      total: result.length,
+      filtres: { categorie, prixMin, prixMax, stock }
+    });
+  });
+});
+
+
 app.listen(3000, () => {
   console.log("Le server écouter sur le port 3000");
 });
