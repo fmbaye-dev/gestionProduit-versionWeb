@@ -60,6 +60,10 @@
   border: 1px solid var(--color-rouge);
   font-weight: 500;
 }
+.form-produit .message-error,
+.form-produit .message-success {
+  margin-top: 30px;
+}
 
 /* CONTENEUR PRINCIPAL */
 main {
@@ -69,7 +73,8 @@ main {
 }
 
 /* SECTION */
-.listesProduits {
+.listesProduits,
+.venteProduits {
   padding: 30px;
   border-radius: 10px;
 }
@@ -174,11 +179,21 @@ td a[href*="modifier"]:hover,
 
 /* BOUTON SUPPRIMER */
 td a[href*="supprimer"] {
+  background-color: var(--color-rouge);
+  color: var(--color-rouge-light);
+}
+
+td a[href*="supprimer"]:hover {
+  background-color: var(--hover);
+}
+
+/* BOUTON VENDRE */
+td a[href*="vendre"] {
   background-color: var(--color-secondary-light);
   color: var(--color-text);
 }
 
-td a[href*="supprimer"]:hover {
+td a[href*="vendre"]:hover {
   background-color: var(--color-secondary);
 }
 

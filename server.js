@@ -35,9 +35,24 @@ connection.connect((err) => {
     date_ajout datetime
   )`;
 
+   const requeteSql2 = `create table if not exists ventes (
+    id int auto_increment primary key,
+    idProduit int,
+    prixTotal int,
+    quantite int,
+    date_vente datetime,
+    constraint FK_ventes foreign key (idProduit) references produits(id)
+    on delete cascade on update cascade
+  )`;
+
   connection.query(requeteSql, (err, result) => {
     if (err) throw err;
-    console.log("Table créée avec succes!");
+    console.log("Table produits créée avec succes!");
+  });
+
+  connection.query(requeteSql2, (err, result) => {
+    if (err) throw err;
+    console.log("Table ventes créée avec succes!");
   });
 });
 
@@ -86,21 +101,21 @@ app.post("/produits/:id/modifier", (req, res) => {
   if (!nom || !prix || quantite === undefined || !categorie) {
     return res.render("modifier.ejs", {
       produit: { id, nom, prix, quantite, categorie },
-      error: "Tous les champs sont obligatoires"
+      error: "Tous les champs sont obligatoires",
     });
   }
 
   if (prix <= 0) {
     return res.render("modifier.ejs", {
       produit: { id, nom, prix, quantite, categorie },
-      error: "Le prix doit être supérieur à 0"
+      error: "Le prix doit être supérieur à 0",
     });
   }
 
   if (quantite < 0) {
     return res.render("modifier.ejs", {
       produit: { id, nom, prix, quantite, categorie },
-      error: "La quantité ne peut pas être négative"
+      error: "La quantité ne peut pas être négative",
     });
   }
 
@@ -112,8 +127,90 @@ app.post("/produits/:id/modifier", (req, res) => {
     (err, result) => {
       if (err) throw err;
 
-      res.redirect("/?success=modification_reussie");
-    }
+      res.redirect("/?success=Produit modifié avec succès");
+    },
+  );
+});
+
+app.get("/vendre/:id", (req, res) => {
+  const id = req.params.id;
+
+  connection.query(
+    "select * from produits where id = ?",
+    [id],
+    (err, result) => {
+      if (err) throw err;
+
+      if (result.length === 0) {
+        return res.status(404).render("404.ejs", {
+          message: "Produit introuvable",
+        });
+      }
+
+      connection.query(
+        `select v.id, p.nom, p.categorie, v.quantite, p.prix, v.prixTotal, v.date_vente
+		from ventes v, produits p where v.idProduit = p.id order by v.date_vente asc`,
+        (err2, resultatVente) => {
+          if (err2) throw err2;
+
+		  const success = req.query.success || null;
+
+          res.render("vente.ejs", {
+            produit: result[0],
+            resultatVente,
+            error: resultatVente.length === 0 ? "Aucune vente trouvée" : null,
+			success,
+          });
+        },
+      );
+    },
+  );
+});
+
+app.post("/produits/:id/vendre", (req, res) => {
+  const id = req.params.id;
+  const quantiteVendue = req.body.quantite;
+
+  connection.query(
+    "select * from produits where id = ?",
+    [id],
+    (err, result) => {
+      if (err) throw err;
+
+      if (result.length === 0) {
+        return res.status(404).render("404.ejs", {
+          message: "Produit introuvable",
+        });
+      }
+
+      const produit = result[0];
+
+      if (quantiteVendue > produit.quantite) {
+        return res.render("vente.ejs", {
+          produit,
+          ventes: [],
+          error: "Stock insuffisant",
+        });
+      }
+
+      const prixTotal = produit.prix * quantiteVendue;
+
+      connection.query(
+        "insert into ventes (idProduit, quantite, prixTotal) values (?, ?, ?) ",
+        [id, quantiteVendue, prixTotal],
+        () => {
+          connection.query(
+            "update produits set quantite = quantite - ? where id = ?",
+            [quantiteVendue, id],
+            () => {
+              res.redirect(
+                "/vendre/" + id + "?success=Produit vendu avec succès",
+              );
+            },
+          );
+        },
+      );
+    },
   );
 });
 
@@ -183,7 +280,7 @@ app.post("/produits", (req, res) => {
 
       res.render("ajouter.ejs", {
         error: null,
-        success: `Produit ajouté avec succès (ID : ${result.insertId})`,
+        success: `Produit ajouté avec succès`,
         values: {},
       });
     }
@@ -196,25 +293,21 @@ app.get("/recherche", (req, res) => {
   let sql = "select * from produits where 1=1";
   let params = [];
 
-  // Filtre catégorie
   if (categorie) {
     sql += " and categorie = ?";
     params.push(categorie);
   }
 
-  // Prix minimum
   if (prixMin) {
     sql += " and prix >= ?";
     params.push(prixMin);
   }
 
-  // Prix maximum
   if (prixMax) {
     sql += " and prix <= ?";
     params.push(prixMax);
   }
 
-  // En stock uniquement
   if (stock === "on") {
     sql += " and quantite > 0";
   }

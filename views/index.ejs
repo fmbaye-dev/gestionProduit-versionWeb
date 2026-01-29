@@ -64,10 +64,17 @@
                   <td><%= produit.quantite %></td>
                   <td><%= produit.categorie %></td>
                   <td class="action">
-                    <a href="/modifier/<%= produit.id %>">Modifier</a>|
-                    <a href="/produits/<%= produit.id %>/supprimer">
-                      Supprimer
+                    <a href="/modifier/<%= produit.id %>">Modifier</a>
+					<% if (produit.quantite == 0) { %>
+                    <a href="/produits/<%= produit.id %>/supprimer"
+						onclick="return confirm ('Voulez-vous supprimer ce produit ?')">
+                     Supprimer
                     </a>
+					<% } %>
+
+					<% if (produit.quantite != 0) { %>
+                    <a href="/vendre/<%= produit.id %>">Vendre</a>
+					<% } %>
                   </td>
                 </tr>
                 <% }) %>
