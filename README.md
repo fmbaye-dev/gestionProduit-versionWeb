@@ -28,8 +28,7 @@ Le projet est développé avec **Node.js**, **Express**, **MySQL** et **EJS**.
 
 tp-magasin/  
 ├── server.js  
-├── package.json  
-├── magasin.sql  
+├── package.json    
 ├── public/  
 │ ├── style.css  
 │ └── base.css  
@@ -62,10 +61,10 @@ Champ	     | Type	          | Description
 ---------- |----------------|--------------------
 id         | INT	          | Clé primaire
 nom	       | VARCHAR(100)   | Nom du produit
-prix	     | int            |	Prix en FCFA
-quantite   |	INT	          | Quantité en stock
-categorie  |	VARCHAR(50)	  | Catégorie
-date_ajout |	TIMESTAMP	    | Date d’ajout
+prix	     | INT            |	Prix en FCFA
+quantite   | INT	          | Quantité en stock
+categorie  | VARCHAR(50)	  | Catégorie
+date_ajout | TIMESTAMP	    | Date d’ajout
 
 **Table ventes**
 
@@ -74,7 +73,7 @@ Champ	     | Type	     | Description
 id	       | INT	     | Clé primaire
 idProduit	 | INT	     | Produit vendu
 quantite	 | INT	     | Quantité vendue
-prixTotal	 | DECIMAL	 | Prix total
+prixTotal	 | INT    	 | Prix total
 date_vente | TIMESTAMP | Date de vente
 
 ---
